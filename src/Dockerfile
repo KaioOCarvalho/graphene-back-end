@@ -1,25 +1,7 @@
-FROM ubuntu:20.04
+FROM python:3.8
 
-RUN apt-get update && apt-get upgrade -y && apt install apt-utils
+ADD . /code
 
-RUN apt install tzdata -y
+WORKDIR /code/src
 
-ENV TZ Asia/Colombo
-
-RUN apt install postgresql postgresql-contrib -y
-
-RUN apt install python3-pip python3-dev -y
-
-RUN apt install libpq-dev -y
-
-RUN pip3 install Flask \
-    Flask-GraphQL \
-    Flask-GraphQL-Auth \
-    SQLAlchemy \
-    graphene \
-    graphene-sqlalchemy \
-    psycopg2
-
-WORKDIR /test/graphql/src
-
-EXPOSE 5000/tcp
+RUN pip install Flask

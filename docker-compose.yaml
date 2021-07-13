@@ -4,10 +4,25 @@ services:
   web:
     container_name: processor
     tty: true
-    build: 
-        context: .
-        dockerfile: ./src/Dockerfile
-    volumes: 
-        - ".:/test/graphql"
-    ports: 
-        - "5000:5000"
+    build:
+      context: .
+      dockerfile: ./src/Dockerfile
+    volumes:
+      - ".:/test/graphql"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+  db:
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+    image: postgres:latest
+    networks:
+      - default
+    ports:
+      - 5404:5432
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
