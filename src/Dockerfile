@@ -1,7 +1,11 @@
-FROM python:3.8
+FROM ubuntu:20.04
 
-ADD . /code
+RUN apt-get update && apt-get upgrade -y && apt install apt-utils
 
-WORKDIR /code/src
+RUN apt install python3-pip python3-dev -y
 
-RUN pip install Flask
+RUN pip3 install Flask
+
+WORKDIR /test/graphql/src
+
+EXPOSE 5000
