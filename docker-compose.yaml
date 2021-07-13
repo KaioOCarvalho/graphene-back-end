@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  web:
+    container_name: processor
+    tty: true
+    build: 
+        context: .
+        dockerfile: ./src/Dockerfile
+    volumes: 
+        - ".:/test/graphql"
+    ports: 
+        - "5000:5000"
